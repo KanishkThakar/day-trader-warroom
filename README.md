@@ -1,6 +1,6 @@
 # The Day Trader skill
 
-11 Claude skills for day trading: scan thousands of charts, track breaking news, time every entry and exit, and replay every outcome before you risk a dollar.
+12 Claude skills for day trading: scan thousands of charts, track breaking news, time every entry and exit, replay every outcome before you risk a dollar, and run it all from one war room.
 
 Free, MIT, no signup, no API key. The tools are plain Python that read free
 public data: Yahoo Finance charts, Nasdaq Trader's symbol lists, SEC EDGAR
@@ -12,6 +12,19 @@ to get in, and another sets your stop and your target before you do. And the
 craziest one is the Time Machine: before you risk a dollar, it replays the
 rest of the session 10,000 times from the stock's own recent bars, plus every
 past day the same setup fired, and tells you the honest odds.
+
+And then there is the War Room. One command runs all of it: it scans for
+breakouts, runs the Time Machine on every one of them 10,000 times, sizes
+and risk-checks each, ranks them, and draws the whole thing on one page:
+the candles, the cone of 10,000 futures, the odds, every past time the setup
+fired, the ticket and the risk verdict. Replay any of the last 60 sessions
+and it also shows, faded in, what the rest of the day really did.
+
+```
+/trader-warroom scan                                      # every breakout right now, replayed and ranked
+/trader-warroom TSLA                                      # one ticker through the whole pack
+/trader-warroom scan --now "2026-10-22 10:15" --at-trigger   # replay this morning, then see what really happened
+```
 
 And no trade goes through until you say yes. Nothing in this pack can place
 an order on its own. Paper trading is the default.
@@ -26,7 +39,7 @@ an order on its own. Paper trading is the default.
 Paste this into Claude:
 
 ```
-https://github.com/Jakeschincariol/day-trader-skill
+https://github.com/KanishkThakar/day-trader-skill
 
 install skill
 ```
@@ -34,7 +47,7 @@ install skill
 Or as a plugin, in Claude Code:
 
 ```
-/plugin marketplace add Jakeschincariol/day-trader-skill
+/plugin marketplace add KanishkThakar/day-trader-skill
 /plugin install day-trader-skill@day-trader-skill
 ```
 
@@ -43,7 +56,7 @@ Claude Code namespaces plugin skills, so installed as a plugin they show up as
 plain `/trader-scanner`:
 
 ```bash
-git clone https://github.com/Jakeschincariol/day-trader-skill.git
+git clone https://github.com/KanishkThakar/day-trader-skill.git
 cp -r day-trader-skill/trader-* ~/.claude/skills/
 ```
 
@@ -57,7 +70,7 @@ The tools need Python 3.8 or newer. Nothing to pip install. The SEC tools
 email in `trader/config.json` (`"sec_user_agent": "Your Name you@example.com"`)
 or in the `SEC_USER_AGENT` environment variable.
 
-## The eleven
+## The twelve
 
 | command | job | what it does |
 | --- | --- | --- |
@@ -72,6 +85,7 @@ or in the `SEC_USER_AGENT` environment variable.
 | `/trader-alerts` | Price Alerts | Rings when a price, a stop or the opening bell hits. |
 | `/trader-analyst` | Earnings Analyst | Reads earnings reports and sums up what changed. |
 | `/trader-pelosi` | Pelosi Tracker | Reads Congress's stock-trade disclosures the minute they are filed. |
+| `/trader-warroom` | War Room | Runs the whole pack in one command, replays and ranks every breakout, and draws it all on one dashboard. |
 
 ## How to use it
 
@@ -82,6 +96,7 @@ what the last one wrote:
 scanner -> news -> entry -> exit -> timemachine -> budget -> risk -> broker   (one trade)
 alerts: stop, target, flat by the close                                       (while it is open)
 news / analyst / pelosi                                                        (on a schedule)
+warroom: scanner -> entry -> exit -> timemachine -> budget -> risk -> news     (all of it, one page)
 ```
 
 An example, the trade in the reel: Tesla, Monday October 19 2026, real data.
@@ -141,6 +156,9 @@ python3 trader-alerts/alerts.py add --from-plan                        # stop, t
 python3 trader-alerts/alerts.py check                                  # rings what hit, once
 python3 trader-analyst/facts.py TSLA                                   # quarters, growth, EPS
 python3 trader-pelosi/ptr.py index --member pelosi                     # her PTRs this year
+python3 trader-warroom/warroom.py run TSLA                             # the whole pack, one ticker, one page
+python3 trader-warroom/warroom.py scan --top 8                         # breakouts, each replayed and ranked
+python3 trader-warroom/warroom.py pick NVDA                            # promote one into trader/ for the broker
 ```
 
 ```bash
@@ -210,7 +228,8 @@ trader-broker/      SKILL.md, ticket.py, claude_desktop_config.example.json
 trader-alerts/      SKILL.md, alerts.py, alerts.example.json
 trader-analyst/     SKILL.md, facts.py, metrics.example.json
 trader-pelosi/      SKILL.md, ptr.py
+trader-warroom/     SKILL.md, warroom.py, dashboard.html
 tests/              unittest suite + offline fixtures
 ```
 
-MIT. Made by [Jake Schincariol](https://opusjake.ai).
+MIT. Made by [Jake Schincariol](https://opusjake.ai). The War Room by [Kanishk Thakar](https://github.com/KanishkThakar).
