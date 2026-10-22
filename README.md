@@ -36,8 +36,6 @@ an order on its own. Paper trading is the default.
 
 ## Install
 
-The repo is private for now: the one-line installs below work for you while you are signed in to GitHub. To share it, make the repo public (Settings, General, Danger Zone).
-
 Paste this into Claude:
 
 ```
