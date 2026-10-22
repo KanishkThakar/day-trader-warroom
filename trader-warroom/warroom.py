@@ -68,7 +68,7 @@ TOOLS = {
 EXAMPLE_CONFIG = os.path.join(SKILLS_DIR, "trader-budget", "config.example.json")
 EXAMPLE_UA = "you@example.com"
 
-UA = "Mozilla/5.0 (compatible; day-trader-skill/2.1; +https://github.com/KanishkThakar/day-trader-skill)"
+UA = "Mozilla/5.0 (compatible; day-trader-skill/2.1; +https://github.com/KanishkThakar/day-trader-warroom)"
 HOSTS = ("query2", "query1")
 BACKOFF = 5.0       # seconds before the one retry after an HTTP 429
 PAUSE = 0.3         # seconds between chart requests, per worker

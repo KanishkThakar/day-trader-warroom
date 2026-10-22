@@ -36,10 +36,12 @@ an order on its own. Paper trading is the default.
 
 ## Install
 
+The repo is private for now: the one-line installs below work for you while you are signed in to GitHub. To share it, make the repo public (Settings, General, Danger Zone).
+
 Paste this into Claude:
 
 ```
-https://github.com/KanishkThakar/day-trader-skill
+https://github.com/KanishkThakar/day-trader-warroom
 
 install skill
 ```
@@ -47,7 +49,7 @@ install skill
 Or as a plugin, in Claude Code:
 
 ```
-/plugin marketplace add KanishkThakar/day-trader-skill
+/plugin marketplace add KanishkThakar/day-trader-warroom
 /plugin install day-trader-skill@day-trader-skill
 ```
 
@@ -56,8 +58,8 @@ Claude Code namespaces plugin skills, so installed as a plugin they show up as
 plain `/trader-scanner`:
 
 ```bash
-git clone https://github.com/KanishkThakar/day-trader-skill.git
-cp -r day-trader-skill/trader-* ~/.claude/skills/
+git clone https://github.com/KanishkThakar/day-trader-warroom.git
+cp -r day-trader-warroom/trader-* ~/.claude/skills/
 ```
 
 Project-local instead of global: copy the same folders into your repo's
